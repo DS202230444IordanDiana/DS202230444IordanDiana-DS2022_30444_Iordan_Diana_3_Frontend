@@ -8,6 +8,8 @@ import ErrorPage from "./commons/errorhandling/error-page";
 import styles from "./commons/styles/project-style.css";
 import Register from "./authentication/register";
 import Login from "./authentication/login";
+import { IoCaretBackCircleSharp } from "react-icons/io5";
+import { Button } from "@mui/material";
 
 /*
     Namings: https://reactjs.org/docs/jsx-in-depth.html#html-tags-vs.-react-components
@@ -18,6 +20,14 @@ function App() {
     <div className={styles.back}>
       <Router>
         <div>
+          <Button
+            startIcon={<IoCaretBackCircleSharp />}
+            variant="contained"
+            color="secondary"
+            href="/"
+          >
+            Go to homepage
+          </Button>
           {/* <NavigationBar /> */}
           <Switch>
             <Route exact path="/" render={() => <Home />} />

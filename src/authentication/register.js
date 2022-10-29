@@ -4,8 +4,9 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { AiOutlineClear } from "react-icons/ai";
 import "../commons/styles/form-styles.css";
+import { IoCaretBackCircleSharp } from "react-icons/io";
 
-const Register = () => {
+const Register = ({ homepageButton }) => {
   return (
     <div>
       <form id="registerForm" className="formClass">
