@@ -1,0 +1,24 @@
+.jumbotron {
+    width: "100%";
+    height: 100vh;  
+    background-position: "top";
+    background-repeat: "no-repeat";
+    background-size: "cover";
+    background-image: url("../images/mainBackground.jpg");
+}
+
+li.dropdown.nav-item{
+    background-color: #1565c0;
+    border-radius: 5px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    font-family:  Georgia, 'Times New Roman', Times, serif;
+    font: white;
+    text-decoration: solid;
+}
+
+#root > div > div > div:nth-child(1) > nav > ul > li > a {
+    color:white;
+    font-size: 15px;
+}
