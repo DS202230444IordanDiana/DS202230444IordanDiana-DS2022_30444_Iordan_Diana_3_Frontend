@@ -13,20 +13,30 @@ import {
 } from "reactstrap";
 
 import logo from "./commons/images/icon.png";
+import { useHistory } from "react-router-dom";
 
-const userNavbar = (
-  <DropdownItem>
-    <NavLink href="/person">asasd</NavLink>
-  </DropdownItem>
-);
-
-const adminNavbar = (
+const userNavbar = ({ logout }) => (
   <>
     <DropdownItem>
-      <NavLink href="/person">People</NavLink>
+      <NavLink href="/devices">Devices</NavLink>
+    </DropdownItem>
+
+    <DropdownItem onClick={logout}>
+      <NavLink>Log out</NavLink>
+    </DropdownItem>
+  </>
+);
+
+const adminNavbar = ({ logout }) => (
+  <>
+    <DropdownItem>
+      <NavLink href="/admin/person">People</NavLink>
     </DropdownItem>
     <DropdownItem>
       <NavLink href="/devices">Devices</NavLink>
+    </DropdownItem>
+    <DropdownItem onClick={logout}>
+      <NavLink>Log out</NavLink>
     </DropdownItem>
   </>
 );
@@ -42,23 +52,32 @@ const basicNavbar = (
   </>
 );
 
-function selectDropdownItems(user) {
+function selectDropdownItems(user, logout) {
   if (user) {
     if (user.role === "admin") {
-      return adminNavbar;
+      return adminNavbar((logout = { logout }));
     }
     if (user.role === "user") {
-      return userNavbar;
+      return userNavbar((logout = { logout }));
     }
   }
   return basicNavbar;
 }
+
 const textStyle = {
   color: "white",
   textDecoration: "none",
 };
 
-function NavigationBar({ user }) {
+function NavigationBar() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    history.push("/");
+  };
+
   return (
     <div>
       <Navbar color="dark" className="navbarClass" light expand="md">
@@ -70,7 +89,9 @@ function NavigationBar({ user }) {
             <DropdownToggle nav caret size="lg">
               Menu
             </DropdownToggle>
-            <DropdownMenu right>{selectDropdownItems(user)}</DropdownMenu>
+            <DropdownMenu right>
+              {selectDropdownItems(user, logout)}
+            </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
       </Navbar>

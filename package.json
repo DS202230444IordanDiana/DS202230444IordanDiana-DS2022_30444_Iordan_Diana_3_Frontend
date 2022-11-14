@@ -21,7 +21,8 @@
     "react-scripts": "^5.0.1",
     "react-table": "^6.10.0",
     "reactstrap": "^7.0.2",
-    "recharts": "^0.22.5"
+    "recharts": "^0.22.5",
+    "yarn": "^1.22.19"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -9,6 +9,9 @@ import styles from "./commons/styles/project-style.css";
 import Login from "./authentication/login";
 // import DeviceContainer from "./admin/device-container";
 import PrivateRoute from "./authentication/privateRoute";
+import { UserContainer } from "./user/user-container";
+import DeviceContainer from "./admin/device-container";
+import { AdminHomepage } from "./admin/adminHomepage";
 
 function App() {
   return (
@@ -19,10 +22,16 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" />
 
-            <Route exact path="/person" render={() => <PersonContainer />} />
-
+            <Route
+              exact
+              path="/admin/person"
+              render={() => <PersonContainer />}
+            />
+            <Route exact path="/user" render={() => <UserContainer />} />
             <Route exact path="/error" render={() => <ErrorPage />} />
             <Route path="/login" render={() => <Login />} />
+            <Route path="/devices" render={() => <DeviceContainer />} />
+            <Route path="/admin" render={() => <AdminHomepage />} />
 
             {/* <Route exact path="/devices" render={() => <DeviceContainer />} /> */}
 

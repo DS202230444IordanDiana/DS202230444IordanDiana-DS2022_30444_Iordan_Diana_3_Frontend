@@ -13,11 +13,46 @@ function getPersons(callback) {
   RestApiClient.performRequest(request, callback);
 }
 
+function updatePerson(params, callback) {
+  console.log("PARAMS:", params);
+  let request = new Request(HOST.backend_api + endpoint.person + "/update", {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(params),
+  });
+
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
 function getPersonById(params, callback) {
   let request = new Request(HOST.backend_api + endpoint.person + params.id, {
     method: "GET",
   });
 
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
+function getPersonByUsername(params, callback) {
+  let request = new Request(
+    HOST.backend_api + endpoint.person + "/get" + params.id,
+    {
+      method: "GET",
+    }
+  );
+
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
+function deletePersonById(id, callback) {
+  let request = new Request(HOST.backend_api + endpoint.person + "/" + id, {
+    method: "DELETE",
+  });
   console.log(request.url);
   RestApiClient.performRequest(request, callback);
 }
@@ -37,4 +72,11 @@ function postPerson(user, callback) {
   RestApiClient.performRequest(request, callback);
 }
 
-export { getPersons, getPersonById, postPerson };
+export {
+  getPersons,
+  getPersonById,
+  postPerson,
+  getPersonByUsername,
+  deletePersonById,
+  updatePerson,
+};

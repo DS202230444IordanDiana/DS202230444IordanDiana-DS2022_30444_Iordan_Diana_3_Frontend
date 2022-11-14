@@ -13,8 +13,9 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = { username: username, password: password, role: "user" };
+    const user = { username: username, password: password, role: "admin" };
     //TODO: USE API TO
+
     localStorage.setItem("user", JSON.stringify(user));
     history.push("/");
   };
@@ -35,6 +36,7 @@ const Login = () => {
             id="loginUsername"
             onChange={(e) => {
               setUsername(e.target.value);
+              console.log(username);
             }}
           />
 

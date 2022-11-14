@@ -3,7 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 
 // Redirect will display the user to annew pace
 
-const PrivateRoute = ({ props }) => {
+const PrivateRoute = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) {
