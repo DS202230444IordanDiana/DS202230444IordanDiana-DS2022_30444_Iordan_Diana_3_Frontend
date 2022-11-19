@@ -58,7 +58,7 @@ function PersonForm(props) {
   const [formControls, setFormControls] = useState(
     formControlsInit(props.user)
   );
-  const [isEdited, setEdited] = useState(false);
+  const [isEdited, setEdited] = useState(props.isEdited);
 
   function handleChange(event) {
     let name = event.target.name;
@@ -98,11 +98,9 @@ function PersonForm(props) {
   }
 
   function updatePerson(person) {
-    setEdited(true);
     return API_USERS.updatePerson(person, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
         console.log("Successfully updated person with id: " + result.id);
-        setEdited(false);
         props.reloadHandler();
       } else {
         setError((error) => ({ status: status, errorMessage: err }));
@@ -112,7 +110,6 @@ function PersonForm(props) {
 
   function handleSubmit() {
     let person = {
-      id: props.user.id,
       name: formControls.name.value,
       username: formControls.username.value,
       password: formControls.password.value,
@@ -120,6 +117,7 @@ function PersonForm(props) {
       address: formControls.address.value,
     };
     if (props.user) {
+      person["id"] = props.user.id;
       updatePerson(person);
     } else {
       registerPerson(person);
@@ -141,7 +139,9 @@ function PersonForm(props) {
           required
         />
         {formControls.username.touched && !formControls.username.valid && (
-          <div className={"error-message"}>Email must have a valid format</div>
+          <div className={"error-message"}>
+            Username must have a valid format
+          </div>
         )}
       </FormGroup>
       <FormGroup id="password">
@@ -158,7 +158,9 @@ function PersonForm(props) {
         />
 
         {formControls.password.touched && !formControls.password.valid && (
-          <div className={"error-message"}>Email must have a valid format</div>
+          <div className={"error-message"}>
+            Password must have at least 8 characters
+          </div>
         )}
       </FormGroup>
 

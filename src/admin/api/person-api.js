@@ -37,9 +37,9 @@ function getPersonById(params, callback) {
   RestApiClient.performRequest(request, callback);
 }
 
-function getPersonByUsername(params, callback) {
+function getPersonByUsername(username, callback) {
   let request = new Request(
-    HOST.backend_api + endpoint.person + "/get" + params.id,
+    HOST.backend_api + endpoint.person + "/get" + "/" + username,
     {
       method: "GET",
     }

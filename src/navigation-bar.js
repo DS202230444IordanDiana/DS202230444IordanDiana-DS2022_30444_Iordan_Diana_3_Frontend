@@ -18,9 +18,11 @@ import { useHistory } from "react-router-dom";
 const userNavbar = ({ logout }) => (
   <>
     <DropdownItem>
-      <NavLink href="/devices">Devices</NavLink>
+      <NavLink href="/user">Devices</NavLink>
     </DropdownItem>
-
+    <DropdownItem>
+      <NavLink href="/charts">Charts</NavLink>
+    </DropdownItem>
     <DropdownItem onClick={logout}>
       <NavLink>Log out</NavLink>
     </DropdownItem>
@@ -54,10 +56,10 @@ const basicNavbar = (
 
 function selectDropdownItems(user, logout) {
   if (user) {
-    if (user.role === "admin") {
+    if (user.role === "ADMIN") {
       return adminNavbar((logout = { logout }));
     }
-    if (user.role === "user") {
+    if (user.role === "USER") {
       return userNavbar((logout = { logout }));
     }
   }

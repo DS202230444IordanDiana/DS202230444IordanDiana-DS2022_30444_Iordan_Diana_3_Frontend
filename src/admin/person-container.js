@@ -78,11 +78,11 @@ function PersonContainer() {
     toggleForm();
     fetchPersons();
   }
-  
+
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (user.role !== "admin") {
-    return <div>Not your bussiness. Go home! </div>;
+    return <div> Page not found </div>;
   }
 
   return (
@@ -94,7 +94,13 @@ function PersonContainer() {
         <br />
         <Row>
           <Col sm={{ size: "8", offset: 1 }}>
-            <Button color="primary" onClick={toggleForm}>
+            <Button
+              color="primary"
+              onClick={() => {
+                setUserToEdit(null);
+                reload();
+              }}
+            >
               Add Person{" "}
             </Button>
           </Col>

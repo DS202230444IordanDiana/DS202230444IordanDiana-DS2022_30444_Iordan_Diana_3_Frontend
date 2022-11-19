@@ -4,49 +4,42 @@ import Table from "../../commons/tables/table";
 import { BsTrash } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 
-function PersonTable(props) {
+function DeviceTable(props) {
   const columns = [
     {
       Header: "Id",
       accessor: "id",
     },
     {
-      Header: "Username",
-      accessor: "username",
+      Header: "Type",
+      accessor: "type",
     },
     {
-      Header: "Password",
-      accessor: "password",
+      Header: "Model",
+      accessor: "model",
     },
     {
-      Header: "Name",
-      accessor: "name",
-    },
-    {
-      Header: "Age",
-      accessor: "age",
-    },
-    {
-      Header: "Address",
-      accessor: "address",
+      Header: "Owner",
+      accessor: "ownerUsername",
     },
     {
       Cell: (content) => (
-        <BsTrash onClick={() => props.deletePerson(content.row.id)} />
+        <BsTrash onClick={() => props.deleteDevice(content.row.id)} />
       ),
     },
     {
       Cell: (content) => (
-        <AiFillEdit onClick={() => props.updatePerson(content.row)} />
+        <AiFillEdit onClick={() => props.updateDevice(content.row)} />
       ),
     },
   ];
 
   const filters = [
     {
-      accessor: "name",
+      accessor: "owner",
     },
   ];
+
   return (
     <Table
       data={props.tableData}
@@ -57,4 +50,4 @@ function PersonTable(props) {
   );
 }
 
-export default PersonTable;
+export default DeviceTable;
