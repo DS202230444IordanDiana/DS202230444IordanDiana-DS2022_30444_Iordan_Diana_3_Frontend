@@ -10,30 +10,29 @@ import Login from "./authentication/login";
 import PrivateRoute from "./authentication/privateRoute";
 import { UserContainer } from "./user/user-container";
 import DeviceContainer from "./admin/device-container";
-import { AdminHomepage } from "./admin/adminHomepage";
-import { DeviceCharts } from "./user/device-charts";
+import { NotificationPage } from "./user/notifications/notifications-container";
 
 function App() {
   return (
     <div className={styles.back}>
       <Router>
         <div>
-          <NavigationBar />
           <Switch>
             <PrivateRoute exact path="/" />
+            <Route
+              path="/user/notifications"
+              render={() => <NotificationPage />}
+            />
 
             <Route
               exact
               path="/admin/person"
               render={() => <PersonContainer />}
             />
-
-            <Route exact path="/charts" render={() => <DeviceCharts />} />
             <Route exact path="/user" render={() => <UserContainer />} />
             <Route exact path="/error" render={() => <ErrorPage />} />
             <Route path="/login" render={() => <Login />} />
             <Route path="/devices" render={() => <DeviceContainer />} />
-            <Route path="/admin" render={() => <AdminHomepage />} />
             <Route render={() => <ErrorPage />} />
           </Switch>
         </div>

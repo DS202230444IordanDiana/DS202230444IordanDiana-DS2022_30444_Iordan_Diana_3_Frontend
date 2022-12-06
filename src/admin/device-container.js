@@ -16,6 +16,7 @@ import * as API_USERS from "./api/person-api";
 import APIResponseErrorMessage from "../commons/errorhandling/api-response-error-message";
 import DeviceForm from "./components/device-form";
 import DeviceTable from "./components/device-table";
+import NavigationBar from "../navigation-bar";
 
 function DeviceContainer() {
   const [isSelected, setIsSelected] = useState(false);
@@ -87,12 +88,14 @@ function DeviceContainer() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (user.role !== "admin") {
-    return <div> Page not found </div>;
+  if (user.role !== "ADMIN") {
+    return <div> Access denied </div>;
   }
 
   return (
     <div>
+      <NavigationBar user={user} />
+
       <CardHeader>
         <strong> Device Management </strong>
       </CardHeader>

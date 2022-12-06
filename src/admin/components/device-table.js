@@ -23,6 +23,10 @@ function DeviceTable(props) {
       accessor: "ownerUsername",
     },
     {
+      Header: "Limit",
+      accessor: "limit",
+    },
+    {
       Cell: (content) => (
         <BsTrash onClick={() => props.deleteDevice(content.row.id)} />
       ),

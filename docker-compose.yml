@@ -1,8 +1,6 @@
 version: '3'
-
 services:
-
-  react:
-    image: fe
-    ports:
-      - "3000:80"
+  react: 
+      image: fe
+      ports:
+        - "3000:3000"

@@ -14,16 +14,14 @@ import APIResponseErrorMessage from "../commons/errorhandling/api-response-error
 import PersonForm from "./components/person-form";
 import * as API_USERS from "./api/person-api";
 import PersonTable from "./components/person-table";
-import { setRef } from "@mui/material";
+import NavigationBar from "../navigation-bar";
 
 function PersonContainer() {
   const [isSelected, setIsSelected] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [userToEdit, setUserToEdit] = useState(null);
-  // Store error status and message in the same object because we don't want
-  // to render the component twice (using setError and setErrorStatus)
-  // This approach can be used for linked state variables.
+
   const [error, setError] = useState({ status: 0, errorMessage: null });
 
   // componentDidMount
@@ -81,12 +79,13 @@ function PersonContainer() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (user.role !== "admin") {
-    return <div> Page not found </div>;
+  if (user.role !== "ADMIN") {
+    return <div> Access denied </div>;
   }
 
   return (
     <div>
+      <NavigationBar user={user} />
       <CardHeader>
         <strong> Person Management </strong>
       </CardHeader>

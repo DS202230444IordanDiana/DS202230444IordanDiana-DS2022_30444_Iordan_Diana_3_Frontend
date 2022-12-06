@@ -21,6 +21,12 @@ const formControlsInit = (device) => {
         valid: false,
         touched: false,
       },
+      limit: {
+        value: device ? device.model : "",
+        placeholder: "Limit...",
+        valid: false,
+        touched: false,
+      },
     };
   }
 };
@@ -90,10 +96,10 @@ function DeviceForm(props) {
       type: formControls.type.value,
       model: formControls.model.value,
       ownerUsername: owner.username,
+      limit: formControls.limit.value,
     };
 
     if (props.device) {
-      console.log(device);
       device["id"] = props.device.id;
       updateDevice(device);
     } else {
@@ -126,6 +132,18 @@ function DeviceForm(props) {
           defaultValue={formControls.model.value}
           touched={formControls.model.touched ? 1 : 0}
           valid={formControls.model.valid}
+          required
+        />
+      </FormGroup>
+      <FormGroup id="limit">
+        <Label for="limitField"> Device Limit: </Label>
+        <Input
+          name="limit"
+          id="limitField"
+          type="number"
+          placeholder={formControls.limit.placeholder}
+          onChange={handleChange}
+          defaultValue={formControls.limit.value}
           required
         />
       </FormGroup>

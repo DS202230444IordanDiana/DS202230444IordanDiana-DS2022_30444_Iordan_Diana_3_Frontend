@@ -18,10 +18,7 @@ import { useHistory } from "react-router-dom";
 const userNavbar = ({ logout }) => (
   <>
     <DropdownItem>
-      <NavLink href="/user">Devices</NavLink>
-    </DropdownItem>
-    <DropdownItem>
-      <NavLink href="/charts">Charts</NavLink>
+      <NavLink href="/user/notifications">Notifications</NavLink>
     </DropdownItem>
     <DropdownItem onClick={logout}>
       <NavLink>Log out</NavLink>
@@ -43,36 +40,12 @@ const adminNavbar = ({ logout }) => (
   </>
 );
 
-const basicNavbar = (
-  <>
-    <DropdownItem>
-      <NavLink href="/">Home</NavLink>
-    </DropdownItem>
-    <DropdownItem>
-      <NavLink href="/login">Login</NavLink>
-    </DropdownItem>
-  </>
-);
-
-function selectDropdownItems(user, logout) {
-  if (user) {
-    if (user.role === "ADMIN") {
-      return adminNavbar((logout = { logout }));
-    }
-    if (user.role === "USER") {
-      return userNavbar((logout = { logout }));
-    }
-  }
-  return basicNavbar;
-}
-
 const textStyle = {
   color: "white",
   textDecoration: "none",
 };
 
-function NavigationBar() {
-  const user = JSON.parse(localStorage.getItem("user"));
+function NavigationBar({ user }) {
   const history = useHistory();
 
   const logout = () => {
@@ -80,23 +53,37 @@ function NavigationBar() {
     history.push("/");
   };
 
+  function selectDropdownItems(user, logout) {
+    if (user) {
+      if (user.role === "ADMIN") {
+        return adminNavbar((logout = { logout }));
+      }
+      if (user.role === "USER") {
+        return userNavbar((logout = { logout }));
+      }
+    }
+  }
   return (
     <div>
-      <Navbar color="dark" className="navbarClass" light expand="md">
-        <NavbarBrand href="/">
-          <img src={logo} width={"50"} height={"35"} />
-        </NavbarBrand>
-        <Nav className="ml-auto mr-3" navbar>
-          <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret size="lg">
-              Menu
-            </DropdownToggle>
-            <DropdownMenu right>
-              {selectDropdownItems(user, logout)}
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Nav>
-      </Navbar>
+      {user ? (
+        <Navbar color="dark" className="navbarClass" light expand="md">
+          <NavbarBrand href="/">
+            <img src={logo} width={"50"} height={"35"} />
+          </NavbarBrand>
+          <Nav className="ml-auto mr-3" navbar>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret size="lg">
+                Menu
+              </DropdownToggle>
+              <DropdownMenu right>
+                {selectDropdownItems(user, logout)}
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+        </Navbar>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
