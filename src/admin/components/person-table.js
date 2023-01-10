@@ -3,6 +3,7 @@ import React from "react";
 import Table from "../../commons/tables/table";
 import { BsTrash } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
+import { AiFillWechat } from "react-icons/ai";
 
 function PersonTable(props) {
   const columns = [
@@ -32,12 +33,29 @@ function PersonTable(props) {
     },
     {
       Cell: (content) => (
-        <BsTrash onClick={() => props.deletePerson(content.row.id)} />
+        <BsTrash
+          cursor={"pointer"}
+          size={20}
+          onClick={() => props.deletePerson(content.row.id)}
+        />
       ),
     },
     {
       Cell: (content) => (
-        <AiFillEdit onClick={() => props.updatePerson(content.row)} />
+        <AiFillEdit
+          cursor={"pointer"}
+          size={30}
+          onClick={() => props.updatePerson(content.row)}
+        />
+      ),
+    },
+    {
+      Cell: (content) => (
+        <AiFillWechat
+          cursor={"pointer"}
+          size={30}
+          onClick={() => props.navigateToChat(content.row)}
+        />
       ),
     },
   ];

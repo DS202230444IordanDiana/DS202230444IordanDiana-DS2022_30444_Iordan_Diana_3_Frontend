@@ -11,6 +11,7 @@ import PrivateRoute from "./authentication/privateRoute";
 import { UserContainer } from "./user/user-container";
 import DeviceContainer from "./admin/device-container";
 import { NotificationPage } from "./user/notifications/notifications-container";
+import { MainChat } from "./chat/main-chat";
 
 function App() {
   return (
@@ -23,13 +24,13 @@ function App() {
               path="/user/notifications"
               render={() => <NotificationPage />}
             />
-
             <Route
               exact
               path="/admin/person"
               render={() => <PersonContainer />}
             />
             <Route exact path="/user" render={() => <UserContainer />} />
+            <Route exact path="/chat" render={() => <MainChat />} />
             <Route exact path="/error" render={() => <ErrorPage />} />
             <Route path="/login" render={() => <Login />} />
             <Route path="/devices" render={() => <DeviceContainer />} />

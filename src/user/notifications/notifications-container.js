@@ -4,6 +4,7 @@ import * as Stomp from "stompjs";
 import NavigationBar from "../../navigation-bar";
 
 var stompClient = null;
+var socket = new SockJS("http://127.0.0.1:8080/ws");
 
 function setConnected(connected) {
   document.getElementById("connect").disabled = connected;
@@ -16,21 +17,22 @@ function setConnected(connected) {
 
 function connect() {
   const user = JSON.parse(localStorage.getItem("user"));
-  var socket = new SockJS("http://127.0.0.1:8080/ws");
   stompClient = Stomp.over(socket);
   if (user) {
-    stompClient.connect({}, function(frame) {
+    stompClient.connect({}, function (frame) {
       setConnected(true);
       console.log("Connected: " + frame);
-      stompClient.subscribe("/all/messages/" + user.username, function(
-        messageOutput
-      ) {
-        showMessageOutput(JSON.parse(messageOutput.body));
-      });
+      stompClient.subscribe(
+        "/all/messages/" + user.username,
+        function (messageOutput) {
+          showMessageOutput(JSON.parse(messageOutput.body));
+        }
+      );
     });
   }
 }
 
+function sendTypingNotification() {}
 function disconnect() {
   console.log("here");
   if (stompClient != null) {

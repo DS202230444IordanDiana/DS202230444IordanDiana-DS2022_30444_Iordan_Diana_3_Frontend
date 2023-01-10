@@ -15,6 +15,7 @@ import PersonForm from "./components/person-form";
 import * as API_USERS from "./api/person-api";
 import PersonTable from "./components/person-table";
 import NavigationBar from "../navigation-bar";
+import { useHistory } from "react-router-dom";
 
 function PersonContainer() {
   const [isSelected, setIsSelected] = useState(false);
@@ -23,6 +24,7 @@ function PersonContainer() {
   const [userToEdit, setUserToEdit] = useState(null);
 
   const [error, setError] = useState({ status: 0, errorMessage: null });
+  const history = useHistory();
 
   // componentDidMount
   useEffect(() => {
@@ -77,6 +79,12 @@ function PersonContainer() {
     fetchPersons();
   }
 
+  function navigateToChat(content) {
+    const receiver = { username: content.username };
+    sessionStorage.setItem("to", JSON.stringify(receiver));
+    window.open("/chat", "_blank");
+  }
+
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (user.role !== "ADMIN") {
@@ -112,6 +120,7 @@ function PersonContainer() {
                 tableData={tableData}
                 deletePerson={deletePerson}
                 updatePerson={updatePerson}
+                navigateToChat={navigateToChat}
               />
             )}
             {error.status > 0 && (
